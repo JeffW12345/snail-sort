@@ -23,36 +23,32 @@ namespace CodeWarsChallenges
                 // If next move right
                 if (GetNextMove(prevDirection, currCol, currRow, numRowsandCols, processedDimensions) == "Right")
                 {
-                    theSnail.Add(array[currRow, currCol + 1]);
+                    theSnail.Add(array[currRow, ++currCol]);
                     processedDimensions.Add(currDimensions);
-                    currCol++;
                     prevDirection = "Right";
                     continue;
                 }
                 // If next move down
                 if (GetNextMove(prevDirection, currCol, currRow, numRowsandCols, processedDimensions) == "Down")
                 {
-                    theSnail.Add(array[currRow + 1, currCol]);
+                    theSnail.Add(array[++currRow, currCol]);
                     processedDimensions.Add(currDimensions);
-                    currRow++;
                     prevDirection = "Down";
                     continue;
                 }
                 // If next move up
                 if (GetNextMove(prevDirection, currCol, currRow, numRowsandCols, processedDimensions) == "Up")
                 {
-                    theSnail.Add(array[currRow - 1, currCol]);
+                    theSnail.Add(array[--currRow, currCol]);
                     processedDimensions.Add(currDimensions);
-                    currRow--;
                     prevDirection = "Up";
                     continue;
                 }
                 // If next move left
                 if (GetNextMove(prevDirection, currCol, currRow, numRowsandCols, processedDimensions) == "Left")
                 {
-                    theSnail.Add(array[currRow, currCol - 1]);
+                    theSnail.Add(array[currRow, --currCol]);
                     processedDimensions.Add(currDimensions);
-                    currCol--;
                     prevDirection = "Left";
                     continue;
                 }
@@ -161,6 +157,7 @@ namespace CodeWarsChallenges
             return "No move";
         }
 
+        // Has the element within the array already been traversed?
         private static bool HasAlreadyBeenUsed(List<int> toCheck, List<List<int>> processedDimensions)
         {
             foreach(var usedDim in processedDimensions)
@@ -181,9 +178,8 @@ namespace CodeWarsChallenges
                 {8, 9, 4},
                 {7, 6, 5 },
             };
-
-            // Expected result: 1 2 3 4 5 6 7 8 9
-            Console.WriteLine("Test 1 result is: \n");
+            Console.WriteLine("Test 1 expected result is: \n\n1 2 3 4 5 6 7 8 9");
+            Console.WriteLine("\nTest 1 actual result is: \n");
             var snail = GetSnail(array1);
             foreach (var item in snail)
             {
@@ -197,8 +193,8 @@ namespace CodeWarsChallenges
                 {9, 10, 11, 12 },
                 {13, 14, 15, 16 }
             };
-            // Expected result: 1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
-            Console.WriteLine("\nTest 2 result is:\n");
+            Console.WriteLine("\n\nTest 2 expected result is: \n\n1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10");
+            Console.WriteLine("\nTest 2 actual result is:\n");
             snail = GetSnail(array2);
             foreach (var item in snail)
             {
